@@ -1,0 +1,43 @@
+<% provide(:title, "Site Registration") %>
+<div class="col-sm-6 col-xs-12 col-sm-offset-3">
+<div class="panel panel-default">
+    <div class="panel-heading success-color white-text">
+       <h4>Monitor A New Site</h4>
+    </div>
+    <div class="panel-body">
+            <%= form_for(@site, url: user_sites_path(current_user)) do |f| %>
+			<%= render 'shared/error_messages', object: f.object %>
+		    <%= f.label :name,  'Site Name' %>
+		    <%= f.text_field :name, class: 'form-control', :required => true %>
+			</br>
+		    <%= f.label :ipaddress, 'IP Address' %>
+		    <%= f.text_field :ipaddress, class: 'form-control', :required => true, placeholder: 'IPv4 or IPv6 format' %>
+		    </br>
+		    <%= f.label :ssl, 'SSL Enabled?' %>
+		    <%= f.check_box :ssl, class: 'checkbox' %>
+		    </br>
+		    <div id="siteLoc">
+		   	<%= f.label :latitude, 'Latitude' %>
+		    <%= f.number_field :latitude, class: 'form-control' %>
+		    </br>
+		    <%= f.label :longitude, 'Longitude' %>
+		    <%= f.number_field :longitude, class: 'form-control' %>
+		    </br>
+		    </div>
+		    <%= f.label :description, 'Description' %>
+		    <%= f.text_area :description, class: 'form-control', :required => true, :placeholder => 'Limit of 255 characters', :maxlength => 255 %>
+		    </br>
+		    <%= f.label :callout, 'Callout Email' %>
+		    <%= f.text_field :callout, class: 'form-control', :required => true %>
+		    </br>
+		   	<%= f.label :autoLocate, 'Auto Locate?'%>
+		   	<i>*Lat. and Lon. fields will be overwritten if selected. </i>
+		    <%= f.check_box :autoLocate, class: 'checkbox', :id =>"autoLocateCb" %>
+		    <hr>
+		    <span class='input-group-btn'>
+		    <%= f.submit "Submit", class: "btn btn-primary" %>
+		    </span>
+		    <% end %>
+    </div>
+</div>
+</div>

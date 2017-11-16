@@ -1,0 +1,71 @@
+<div id="map" style='height: 500px;' class='user map'></div>
+
+<script>
+      function initializeMap() {
+        var bounds = new google.maps.LatLngBounds();
+        var map = new google.maps.Map(document.getElementById('map'));
+
+        var infowindow = new google.maps.InfoWindow({maxWidth: 400});
+        var markers = [];
+        <% @sites.each do |s| %>
+              var contentString = '<div id="content">'+
+              '<h3>' + '<%=s.name%>' + '</h3>' +
+              '<div class="list-group">' + '<div class="list-group-item" style="border: none">' + '<h5 class="list-group-item-heading">Address:</h5>' +
+              '<p class="list-group-item-text">' + '<a href="http://<%=s.ipaddress%>" target="_blank"><%=s.ipaddress%></a>' + '</p>' + '</div>' +
+              '<div class="list-group-item" style="border: none">' +
+              '<h5 class="list-group-item-heading">Last Checked</h5>' +
+              '<p class="list-group-item-text">' + 
+              <% if !s.lastchecked.nil? %>
+              '<%=s.lastchecked%>'
+              <% else %>
+              'Never'
+              <% end %> +'</p>' + '</div>' + '<div class="list-group-item" style="border: none">'
+               + '<h5 class="list-group-item-heading">Callout Email</h5>' +
+              '<p class="list-group-item-text">' + '<%=s.callout%>' + '</p>' + '</div>' 
+               +  '<div class="list-group-item" style="border: none">' + '<p class="list-group-item-text">' + '<%= link_to "Edit", edit_user_site_path(current_user,s.id) %>' + '</p>'  + '</div>';
+
+          var position = new google.maps.LatLng(<%= s.latitude %>, <%= s.longitude %>);
+          bounds.extend(position);
+          var marker = new google.maps.Marker({
+            position: position,
+            map: map,
+            title: "<%= s.name %>",
+            <% if s.status == true %>
+            icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+            <% elsif s.status == false %>
+            icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+            <% else %>
+            icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
+            <% end %>
+            contentString: contentString
+          });
+
+            marker.addListener('click', function() {
+                infowindow.close();
+                infowindow.setContent(this.contentString);
+                map.setCenter(this.position);
+                infowindow.open(map, this);
+            });
+
+            markers.push(marker);
+
+          <% end %>
+        var markerCluster = new MarkerClusterer(map, markers,
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+           map.fitBounds(bounds);
+      }
+
+</script>
+
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+
+<script type="text/javascript">
+  if(window.google) {
+    initializeMap();
+  } else {
+    $.ajax("https://maps.googleapis.com/maps/api/js?key=AIzaSyAZiNmoRb3PUjcMiN2u6E3qiGA9-SKJRC8&callback=initializeMap", {
+      crossDomain: true,
+      dataType: 'script'
+    });
+  }
+  </script>

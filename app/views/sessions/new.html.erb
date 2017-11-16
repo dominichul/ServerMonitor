@@ -1,0 +1,30 @@
+<% provide(:title, "Log in") %>
+<div class="col-sm-6 col-xs-12 col-sm-offset-3">
+<div class="panel panel-default">
+    <div class="panel-heading success-color white-text">
+       <h4>Log In</h4>
+    </div>
+    <div class="panel-body">
+            <%= form_for(:session, url: login_path) do |f| %>
+
+		    <%= f.label :email %>
+		    <%= f.email_field :email, class: 'form-control', :required => true %>
+			</br>
+		    <%= f.label :password %>
+		    <%= f.password_field :password, class: 'form-control', :required => true %>
+		    </br>
+		    <%= f.label :remember_me do %>
+		    <%= f.check_box :remember_me %>
+		    <span>Remember me on this computer</span>
+		    <% end %>
+		    <hr>
+		    <span class='input-group-btn'>
+		    <%= f.submit "Sign In", class: "btn btn-primary" %>
+		    </span>
+		    <% end %>
+    </div>
+    <div class="panel-footer text-muted success-color white-text">
+        <%= link_to "Forgot password?", new_password_reset_path %>
+    </div>
+</div>
+</div>

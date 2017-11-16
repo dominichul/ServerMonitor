@@ -1,0 +1,27 @@
+
+$('#site_modal_title').empty();
+$('#site_modal_title').append("<%= @site.name %>");
+
+$('#site_ipaddress').empty();
+$('#site_ipaddress').append("<a href='http://<%=@site.ipaddress%>' target='_blank'><%=@site.ipaddress%></a>");
+
+$('#site_status').empty();
+$('#site_status').append("<% if !@site.status.nil? %> <%= @site.status%> <% else %> Unknown <% end %>");
+
+$('#site_latitude').empty();
+$('#site_latitude').append("<%= @site.latitude%>");
+
+$('#site_longitude').empty();
+$('#site_longitude').append("<%= @site.longitude%>");
+
+$('#site_description').empty();
+$('#site_description').append("<p><%= @site.description%></p>");
+
+$('#site_callout').empty();
+$('#site_callout').append("<%= @site.callout%>");
+
+$('#site_lastchecked').empty();
+$('#site_lastchecked').append("<% if !@site.lastchecked.nil? %> <%= @site.lastchecked%> <% else %> Unknown <% end %>");
+
+
+$('#myModal').modal('show');

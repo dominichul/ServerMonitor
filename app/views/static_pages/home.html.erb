@@ -1,0 +1,47 @@
+<% if logged_in? %>
+<% else %>
+<div class="col-sm-6 col-xs-12 col-sm-offset-3">
+	<div class="panel panel-default">
+		<div class="panel-heading success-color white-text">
+			<h4>Not a member? Register Below</h4>
+		</div>
+		<div class="panel-body">
+			<% if !@user.nil? %>
+			<%= form_for(@user, url: users_path) do |f| %>
+			<%= render 'shared/error_messages', object: f.object %>
+			<%= f.label :email %>
+			<%= f.email_field :email, class: 'form-control' %>
+
+			<%= f.label :password %>
+			<%= f.password_field :password, class: 'form-control' %>
+
+			<%= f.label :password_confirmation %>
+			<%= f.password_field :password_confirmation, class: 'form-control' %>
+		</br>
+		<hr>
+		<span class='input-group-btn'>
+			<%= f.submit "Register", class: "btn btn-primary" %>
+		</span>
+		<% end %>
+		<% else %>
+		<%= form_for(:user, url: users_path) do |f| %>
+		<%= f.label :email %>
+		<%= f.email_field :email, class: 'form-control' %>
+
+		<%= f.label :password %>
+		<%= f.password_field :password, class: 'form-control' %>
+
+		<%= f.label :password_confirmation %>
+		<%= f.password_field :password_confirmation, class: 'form-control' %>
+	</br>
+	<hr>
+	<span class='input-group-btn'>
+		<%= f.submit "Register", class: "btn btn-primary" %>
+	</span>
+	<% end %>
+	<% end %>
+</div>
+</div>
+</div>
+
+<% end %>
