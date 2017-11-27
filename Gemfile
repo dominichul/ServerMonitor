@@ -13,7 +13,6 @@ gem 'bcrypt', '~> 3.1.11'
 # Seeding db with fake records
 gem 'faker', '1.7.3'
 gem 'carrierwave',             '1.1.0'
-gem 'fog',                     '1.40.0'
 # Adding styling using bootstrap-sass
 gem 'bootstrap-sass', '3.3.7'
 gem 'will_paginate',           '3.1.5'

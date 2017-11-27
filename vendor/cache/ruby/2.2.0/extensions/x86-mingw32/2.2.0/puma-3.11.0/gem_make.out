@@ -1,0 +1,17 @@
+C:/RailsInstaller/Ruby2.2.0/bin/ruby.exe -r ./siteconf20171127-10220-1yh6kwg.rb extconf.rb
+checking for BIO_read() in -lcrypto... no
+checking for BIO_read() in -llibeay32... no
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+generating puma_http11-i386-mingw32.def
+compiling http11_parser.c
+compiling io_buffer.c
+compiling mini_ssl.c
+compiling puma_http11.c
+linking shared-object puma/puma_http11.so
+
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 puma_http11.so ./.gem.20171127-10220-ywh9xq/puma
