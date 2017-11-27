@@ -5,10 +5,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
+gem 'rails', '~> 5.1.1'
 gem "http", '~> 2.2.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.1'
 # Adding bcrypt for hashing user passwords
 gem 'bcrypt', '~> 3.1.11'
 # Seeding db with fake records
