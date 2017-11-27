@@ -16,8 +16,6 @@ ActiveRecord::Schema.define(version: 20171115192826) do
     t.string "owner"
     t.string "name"
     t.string "ipaddress"
-    t.float "latitude"
-    t.float "longitude"
     t.string "description"
     t.string "callout"
     t.datetime "lastchecked"
@@ -25,6 +23,8 @@ ActiveRecord::Schema.define(version: 20171115192826) do
     t.boolean "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "latitude"
+    t.float "longitude"
   end
 
   create_table "users", force: :cascade do |t|

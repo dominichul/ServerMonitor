@@ -23,7 +23,6 @@ class Site < ApplicationRecord
 		def check_autoLocate
 			if autoLocate == "1"
 				coords = getCoordinatesFromIP
-				byebug
 				if !coords.nil?
 					self.longitude = coords[0].longitude
 					self.latitude = coords[0].latitude

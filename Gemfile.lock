@@ -136,7 +136,6 @@ GEM
       ruby-progressbar
     multi_json (1.12.2)
     nenv (0.3.0)
-    net-ping (1.7.8)
     nio4r (2.1.0)
     nokogiri (1.8.1-x86-mingw32)
       mini_portile2 (~> 2.3.0)
@@ -256,7 +255,6 @@ DEPENDENCIES
   jquery-rails
   listen (= 3.0.8)
   minitest-reporters (= 1.1.14)
-  net-ping (~> 1.7, >= 1.7.8)
   pg (= 0.20.0)
   puma (~> 3.0)
   rails (~> 5.1.1)
