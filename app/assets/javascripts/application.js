@@ -15,7 +15,5 @@
 //= require bootstrap
 //= require bootstrap-table
 //= require jquery-readyselector
-//= require underscore-min
-//= require gmaps/google
 //= require turbolinks
 //= require_tree .

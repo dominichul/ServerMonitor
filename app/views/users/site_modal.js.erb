@@ -3,25 +3,27 @@ $('#site_modal_title').empty();
 $('#site_modal_title').append("<%= @site.name %>");
 
 $('#site_ipaddress').empty();
-$('#site_ipaddress').append("<a href='http://<%=@site.ipaddress%>' target='_blank'><%=@site.ipaddress%></a>");
+$('#site_ipaddress').append("<b><a href='http://<%=@site.ipaddress%>' target='_blank'><%=@site.ipaddress%></a></b>");
 
 $('#site_status').empty();
-$('#site_status').append("<% if !@site.status.nil? %> <%= @site.status%> <% else %> Unknown <% end %>");
+$('#site_status').append("<b><% if !@site.status.nil? %><% if @site.status %> <div style='color:green;'><%= @site.status%></div><% else %> <div style='color:green;'><%= @site.status%></div> <% end %> <% else %> <div style='color:brown;'>Unknown</div> <% end %></b>");
 
 $('#site_latitude').empty();
-$('#site_latitude').append("<%= @site.latitude%>");
+$('#site_latitude').append("<b><% if @site.latitude > 0 %><%= @site.latitude%>°N <% elsif @site.latitude < 0 %> <%=@site.latitude.abs%>°S <% else %> <%=@site.latitude%>° <% end %></b>");
 
 $('#site_longitude').empty();
-$('#site_longitude').append("<%= @site.longitude%>");
+$('#site_longitude').append("<b><% if @site.longitude < 0 %><%= @site.longitude.abs%>°W <% elsif @site.longitude> 0 %> <%=@site.longitude%>°E <% else %> <%=@site.longitude%>° <% end %></b>");
 
 $('#site_description').empty();
 $('#site_description').append("<p><%= @site.description%></p>");
 
 $('#site_callout').empty();
-$('#site_callout').append("<%= @site.callout%>");
+$('#site_callout').append("<b><%= @site.callout%></b>");
 
 $('#site_lastchecked').empty();
-$('#site_lastchecked').append("<% if !@site.lastchecked.nil? %> <%= @site.lastchecked%> <% else %> Unknown <% end %>");
+$('#site_lastchecked').append("<b><% if !@site.lastchecked.nil? %> <%= @site.lastchecked%> <% else %> Unknown <% end %></b>");
 
+$('#site_edit_btn').empty();
+$('#site_edit_btn').append('<%= button_to "Edit", edit_user_site_path(current_user, @site.id), method: :get, class: "btn btn-warning"%>');
 
 $('#myModal').modal('show');

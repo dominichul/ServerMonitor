@@ -1,55 +1,11 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-.table {
-  margin: 0 0 40px 0;
-  width: 100%;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-  display: table;
-  @media screen and (max-width: 580px){display: block;}
-}
 
-.tablerow {
-  display: table-row;
-  background: #f6f6f6;
-  &:nth-of-type(odd){background: #e9e9e9;}
-  &.header{
-    font-weight: 700;
-    color: #ffffff;
-    background: #ea6153;
-    }
-  &.green{background: #27ae60;}
-  &.blue{background: #2980b9;}
-  @media screen and (max-width: 580px){
-    padding: 8px 0;
-    display: block;
-    }
-}
-
-.cell {
-  padding: 6px 12px;
-  display: table-cell;
-  @media screen and (max-width: 580px){
-    padding: 2px 12px;
-    display: block;
-    }
-}
 
 textarea { 
   resize: vertical;
   max-height: 150px; 
-}
-
-.borderless td, .borderless th {
-    border: none;
-}
-
-hr {
-    border: none;
-    height: 1px;
-    /* Set the hr color */
-    color: #515254; /* old IE */
-    background-color: #515254; /* Modern Browsers */
 }
 
 li.borderless-top {
@@ -58,4 +14,40 @@ li.borderless-top {
 
 li.borderless-bottom {
   border-bottom: 0 none;
+}
+
+hr.thick-line{
+      border: none;
+    height: 1px;
+    /* Set the hr color */
+    color: #515254; /* old IE */
+    background-color: #515254; /* Modern Browsers */
+}
+
+.modal-header{
+    background-color: #2980b9;
+    color:white;
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-topright: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.modal-footer{
+    color:white;
+    -webkit-border-bottom-left-radius: 3px;
+    -webkit-border-bottom-right-radius: 3px;
+    -moz-border-radius-bottomleft: 3px;
+    -moz-border-radius-bottomright: 3px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.thead-inverse {
+    color: #fff;
+    background-color: #2980b9;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
