@@ -22,7 +22,7 @@ class Site < ApplicationRecord
 
 		def check_server
 			begin
-				res = HTTP.timeout(:per_operation, :write => 2, :connect => 5, :read => 2).head("http://#{self.ipaddress}")
+				res = HTTP.timeout(:global, :write => 1, :connect => 2, :read => 1).head("http://#{self.ipaddress}")
 				if res.code.to_i < 500
 					self.update_attributes(:status => true, :lastchecked => Time.now)
 				else
@@ -41,7 +41,7 @@ class Site < ApplicationRecord
 		def check_autoLocate
 			if autoLocate == "1"
 				coords = getCoordinatesFromIP
-				if !coords.nil?
+				if !coords[0].nil?
 					self.longitude = coords[0].longitude
 					self.latitude = coords[0].latitude
 				else

@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails', '~> 5.1.1'
-gem "http", '~> 2.2.2'
+gem "http"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 # Adding bcrypt for hashing user passwords
 gem 'bcrypt', '~> 3.1.11'
