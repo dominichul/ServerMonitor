@@ -21,19 +21,15 @@ class Site < ApplicationRecord
 
 
 		def check_server
-			response = nil
 			begin
-				Net::HTTP.start(self.ipaddress) do |http|
-					response = http.head('/')
-					if response.code.to_i < 500
-						update_attributes(:status => true, :lastchecked => Time.now)
-					else
-						update_attributes(:status => false, :lastchecked => Time.now)
-					end
+				res = HTTP.timeout(:per_operation, :write => 2, :connect => 5, :read => 2).head(server)
+				if res.code.to_i < 500
+					self.update_attributes(:status => true, :lastchecked => Time.now)
+				else
+					self.update_attributes(:status => false, :lastchecked => Time.now)
 				end
 			rescue Exception => ex
-				update_attributes(:status => false, :lastchecked => Time.now)
-				puts "Site #{self.ipaddress} error. Could not fetch header with err: #{ex.class}: #{ex.message}"
+				self.update_attributes(:status => false, :lastchecked => Time.now)
 			end
 		end
 
