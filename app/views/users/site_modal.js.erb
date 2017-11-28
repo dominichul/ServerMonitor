@@ -6,7 +6,7 @@ $('#site_ipaddress').empty();
 $('#site_ipaddress').append("<b><a href='http://<%=@site.ipaddress%>' target='_blank'><%=@site.ipaddress%></a></b>");
 
 $('#site_status').empty();
-$('#site_status').append("<b><% if !@site.status.nil? %><% if @site.status %> <div style='color:green;'><%= @site.status%></div><% else %> <div style='color:green;'><%= @site.status%></div> <% end %> <% else %> <div style='color:brown;'>Unknown</div> <% end %></b>");
+$('#site_status').append("<b><% if !@site.status.nil? %><% if @site.status %> <div style='color:green;'>Online</div><% else %> <div style='color:red;'>Offline</div> <% end %> <% else %> <div style='color:brown;'>Unknown</div> <% end %></b>");
 
 $('#site_latitude').empty();
 $('#site_latitude').append("<b><% if @site.latitude > 0 %><%= @site.latitude%>°N <% elsif @site.latitude < 0 %> <%=@site.latitude.abs%>°S <% else %> <%=@site.latitude%>° <% end %></b>");
@@ -21,7 +21,7 @@ $('#site_callout').empty();
 $('#site_callout').append("<b><%= @site.callout%></b>");
 
 $('#site_lastchecked').empty();
-$('#site_lastchecked').append("<b><% if !@site.lastchecked.nil? %> <%= @site.lastchecked%> <% else %> Unknown <% end %></b>");
+$('#site_lastchecked').append("<b><% if !@site.lastchecked.nil? %>" + jQuery.timeago("<%=(@site.lastchecked.getutc.iso8601)%>") + "<% else %> Unknown <% end %></b>");
 
 $('#site_edit_btn').empty();
 $('#site_edit_btn').append('<%= button_to "Edit", edit_user_site_path(current_user, @site.id), method: :get, class: "btn btn-warning"%>');

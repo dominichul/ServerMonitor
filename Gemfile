@@ -31,6 +31,7 @@ gem 'coffee-rails', '~> 4.2'
 gem "bootstrap-table-rails"
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'rails-timeago', '~> 2.0'
 gem 'ipaddress'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
@@ -43,6 +44,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'geocoder'
+gem 'rufus-scheduler'
 
 group :development, :test do
 	# Use sqlite3 as the database for Active Record

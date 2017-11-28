@@ -7,6 +7,13 @@
 
         var infowindow = new google.maps.InfoWindow({maxWidth: 400});
         var markers = [];
+
+        var oms = new OverlappingMarkerSpiderfier(map, {
+          markersWontMove: true,
+          markersWontHide: true,
+          basicFormatEvents: true
+        });
+
         <% @sites.each do |s| %>
               var contentString = '<div id="content">'+
               '<h3>' + '<%=s.name%>' + '</h3>' +
@@ -40,24 +47,23 @@
             contentString: contentString
           });
 
-            marker.addListener('click', function() {
+            google.maps.event.addListener(marker, 'spider_click', function(e){
                 infowindow.close();
                 infowindow.setContent(this.contentString);
                 map.setCenter(this.position);
                 infowindow.open(map, this);
             });
-
-            markers.push(marker);
+            oms.addMarker(marker)
 
           <% end %>
-        var markerCluster = new MarkerClusterer(map, markers,
-            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+
+
            map.fitBounds(bounds);
       }
 
 </script>
 
-<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier/1.0.3/oms.min.js"></script>
 
 <script async defer type="text/javascript">
   if(window.google) {

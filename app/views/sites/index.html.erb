@@ -24,7 +24,7 @@
             name:"<%=s.name%>",
             ipaddress:"<a href='http://<%=s.ipaddress%>' target='_blank'><%=s.ipaddress%></a>",
             status:"<% if !s.status.nil? %><% if s.status == true %>Online<% else %>Offline<% end %><% else %>Unknown<% end %>",
-            lastchecked: "<% if !s.lastchecked.nil? %><%=s.lastchecked%><% else %>Never<% end %>",
+            lastchecked: "<% if !s.lastchecked.nil? %><%= time_ago_in_words(s.lastchecked) %> ago<% else %>Never<% end %>",
             callout: "<%=s.callout %>",
             view:'<%= link_to 'Edit', edit_user_site_path(current_user, s.id) %>'
           });
@@ -68,4 +68,5 @@
       <%end%>
     </tbody>
     </table>
+    <%= will_paginate @sites %>
 </div>

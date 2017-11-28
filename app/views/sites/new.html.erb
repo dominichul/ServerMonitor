@@ -13,9 +13,6 @@
 		    <%= f.label :ipaddress, 'IP Address' %>
 		    <%= f.text_field :ipaddress, class: 'form-control', :required => true, placeholder: 'IPv4 or IPv6 format' %>
 		    </br>
-		    <%= f.label :ssl, 'SSL Enabled?' %>
-		    <%= f.check_box :ssl, class: 'checkbox' %>
-		    </br>
 		    <div id="siteLoc">
             <%= f.label :latitude, 'Latitude' %>
             <%= f.number_field :latitude, class: 'form-control', :step => :any %>

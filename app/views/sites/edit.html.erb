@@ -26,10 +26,6 @@
       		<td><h4>Callout Email:</h4></td>
       		<td><h4><%= @site.callout %></h4></td>
       		</tr>
-      		<tr>
-      		<td><h4>SSL Enabled?:</h4></td>
-      		<td><h4><% if @site.ssl == true %> Yes <%else%> No <%end%></h4></td>
-      		</tr>
       	</tbody>
       	</table>
       </div>
@@ -49,9 +45,6 @@
                 </br>
                 <%= f.label :ipaddress, 'IP Address' %>
                 <%= f.text_field :ipaddress, class: 'form-control', :required => true, placeholder: 'IPv4 or IPv6 format' %>
-                </br>
-                <%= f.label :ssl, 'SSL Enabled?' %>
-                <%= f.check_box :ssl, class: 'checkbox' %>
                 </br>
                 <div id="siteLoc">
                 <%= f.label :latitude, 'Latitude' %>
@@ -73,6 +66,9 @@
                 <hr>
                 <span class='input-group-btn'>
                 <%= f.submit "Update", class: "btn btn-primary" %>
+                <div style="display: inline-block; margin-left: 10px;">
+                <%= button_to "Delete", user_site_path, method: :delete,  class: "btn btn-danger" %>
+                </div>
                 </span>
                 <% end %>
       </div>
