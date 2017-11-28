@@ -3,7 +3,7 @@ class SitesController < ApplicationController
 	before_action :authenticate_owner, only: [:edit, :update, :destroy, :show]
 
 	def index
-		@sites = User.find_by_id(params[:user_id]).sites.paginate(page: params[:page], per_page: 10)
+		@sites = User.find_by_id(params[:user_id]).sites.paginate(page: params[:page], per_page: 5)
 	end
 
 	def show
