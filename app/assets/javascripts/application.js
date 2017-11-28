@@ -12,9 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require rails-timeago
 //= require bootstrap
 //= require bootstrap-table
+//= require rails-timeago
 //= require jquery-readyselector
 //= require turbolinks
 //= require_tree .
