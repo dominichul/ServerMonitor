@@ -9,7 +9,6 @@ class Site < ApplicationRecord
 
 	belongs_to :user
 	attr_accessor :autoLocate
-	after_create :check_server
 	before_save :downcase_email
 	before_validation :check_autoLocate, on: [:create, :update]
 	IP_REGEX = /^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){3}$/

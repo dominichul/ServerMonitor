@@ -38,6 +38,7 @@ class SitesController < ApplicationController
 
 		@site = User.find_by_id(params[:user_id]).sites.build(site_params)
 		if @site.save
+			@site.check_server
 			redirect_to user_sites_path(params[:user_id])
 		else 
 			render 'new'
