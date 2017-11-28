@@ -22,7 +22,7 @@ class Site < ApplicationRecord
 
 		def check_server
 			begin
-				res = HTTP.timeout(:per_operation, :write => 2, :connect => 5, :read => 2).head(server)
+				res = HTTP.timeout(:per_operation, :write => 2, :connect => 5, :read => 2).head("http://#{self.ipaddress}")
 				if res.code.to_i < 500
 					self.update_attributes(:status => true, :lastchecked => Time.now)
 				else
