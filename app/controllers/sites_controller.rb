@@ -11,7 +11,6 @@ class SitesController < ApplicationController
 	end
 
 	def destroy
-		byebug
 		Site.find_by_id(params[:id]).destroy
 		redirect_to user_sites_path(params[:user_id])
 	end
