@@ -1,0 +1,18 @@
+hide_spinner();
+
+var message;
+var classes;
+
+<% if @result.nil?  %>
+	message = "INVALID IP";
+	classes = "text-primary";
+<% elsif @result %>
+	message = "ONLINE";
+	classes = "text-success";
+<% else %>
+	message = "OFFLINE";
+	classes = "text-danger";
+<% end %>
+
+$('#manualLookupStatus').addClass(classes);
+$('#manualLookupStatus').append(message);

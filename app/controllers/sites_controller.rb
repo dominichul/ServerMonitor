@@ -35,12 +35,23 @@ class SitesController < ApplicationController
 	end
 
 	def create
-
+		start = Time.now
 		@site = User.find_by_id(params[:user_id]).sites.build(site_params)
+		@site.check_autoLocate
+		start2 = Time.now
 		if @site.save
+		finish2 = Time.now
+		diff2 = finish2 - start2
+		puts "TIme to save site is #{diff2}"
 			@site.check_server
+			finish = Time.now
+			diff = finish - start
+			puts "Time from start of Create Req to right before redirect is #{diff}"
 			redirect_to user_sites_path(params[:user_id])
-		else 
+		else
+			finish = Time.now
+			diff = finish - start
+			puts "Time from start of Create Req to right before redirect is #{diff}" 
 			render 'new'
 		end
 	end

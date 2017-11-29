@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   
+  post '/manualLookup', to: 'users#manualLookup'
+
   get '/site_modal', to: 'users#site_modal'
 
   resources :users do

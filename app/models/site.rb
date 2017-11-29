@@ -10,7 +10,6 @@ class Site < ApplicationRecord
 	belongs_to :user
 	attr_accessor :autoLocate
 	before_save :downcase_email
-	before_validation :check_autoLocate, on: [:create, :update]
 	IP_REGEX = /^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){3}$/
 	validates :ipaddress, :presence => true, :format => { :with => Regexp.union(Resolv::IPv4::Regex, Resolv::IPv6::Regex), message: "is invalid"}
 	validates :description, length: { maximum: 255 }
@@ -33,11 +32,6 @@ class Site < ApplicationRecord
 			end
 		end
 
-	private
-		def downcase_email
-			callout.downcase!
-		end
-
 		def check_autoLocate
 			if autoLocate == "1"
 				coords = getCoordinatesFromIP
@@ -48,8 +42,27 @@ class Site < ApplicationRecord
 					self.longitude = nil
 					self.latitude = nil
 				end
-			end
+			end		
+		end
 
+		#static methods
+		def self.check_server(address)
+			begin
+				res = HTTP.timeout(:global, :write => 1, :connect => 2, :read => 1).head("http://#{address}")
+				if res.code.to_i < 500
+					return true
+				else
+					return false
+				end
+
+			rescue Exception => ex
+					return false
+			end
+		end
+
+	private
+		def downcase_email
+			callout.downcase!
 		end
 
 		def getCoordinatesFromIP

@@ -49,6 +49,15 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  def manualLookup
+    pattern = /^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){3}$/
+    if pattern.match?(params[:address])
+      @result = Site.check_server(params[:address]) #true for online, false for offline
+    else
+      @result = nil #not a valid IP address
+    end
+  end
+
   def site_modal
     @site = Site.find(params[:id])
   end

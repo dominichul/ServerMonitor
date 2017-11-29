@@ -1,4 +1,4 @@
-<div class="col-sm-4 col-xs-12">
+<div class="col-md-5 col-xs-12">
   <table id="sitesTable">
     <thead class="thead-inverse">
     </thead>
@@ -12,38 +12,38 @@
       <script>
         hash = [];
         <% @sites.each do |s|%>
-          hash.push({
-            name:"<%=s.name%>",
-            ipaddress:"<a href='http://<%=s.ipaddress%>' target='_blank'><%=s.ipaddress%></a>",
-            status:"<% if !s.status.nil? %><% if s.status == true %>Online<% else %>Offline<% end %><% else %>Unknown<% end %>",
-            view:'<%= link_to 'Edit', site_modal_path(id: s.id), remote: true %>'
-          });
+        hash.push({
+          name:"<%=s.name%>",
+          ipaddress:"<a href='http://<%=s.ipaddress%>' target='_blank'><%=s.ipaddress%></a>",
+          status:"<% if !s.status.nil? %><% if s.status == true %>Online<% else %>Offline<% end %><% else %>Unknown<% end %>",
+          view:'<%= link_to 'Edit', site_modal_path(id: s.id), remote: true %>'
+        });
         <% end %>
         $('#sitesTable').bootstrapTable({
-            columns:[{
-                field: 'name',
-                title: 'Server',
-                sortable: true
-              },{
-                field: 'ipaddress',
-                title: 'Address'
-              },{
-                field: 'status',
-                title: 'Status',
-                sortable: true,
-                cellStyle: function(value){
-                  if(value ==='Unknown'){
-                      return { classes: 'warning' };
-                  }else if(value === 'Online'){
-                    return { classes: 'success'};
-                  }else
-                    return { classes: 'danger'};               
-                }
-              },{
-                field: 'view',
-                title: '*'
-            }],
-            data: hash
+          columns:[{
+            field: 'name',
+            title: 'Server',
+            sortable: true
+          },{
+            field: 'ipaddress',
+            title: 'Address'
+          },{
+            field: 'status',
+            title: 'Status',
+            sortable: true,
+            cellStyle: function(value){
+              if(value ==='Unknown'){
+                return { classes: 'warning' };
+              }else if(value === 'Online'){
+                return { classes: 'success'};
+              }else
+              return { classes: 'danger'};               
+            }
+          },{
+            field: 'view',
+            title: '*'
+          }],
+          data: hash
         });
       </script>
       <%end%>
@@ -54,33 +54,39 @@
 
 <%= render "layouts/site_modal" %>
 
-<div class="col-sm-8 col-xs-12">
+<div class="col-md-7 col-xs-12">
   <%= render 'layouts/map'%>
-  <hr class="thick-line">
-  <div class="panel panel-primary" style="padding-bottom: 0;">
-    <div class="panel-heading">
-      <h3 class="panel-title"> Marker Types</h3>
-    </div>
-    <div class="panel-body">
-      <table class="table" style="margin-bottom: 0px;">
-        <tbody>
-          <tr>
-            <td style="padding-right: 0px; margin-right: 0px;"><img src="https://maps.google.com/mapfiles/ms/icons/green-dot.png" alt="Green Marker"></td>
-            <td><h4>Online</h4></td>
-            <td><img src="https://maps.google.com/mapfiles/ms/icons/red-dot.png" alt="Red Marker"></td>
-            <td><h4>Offline</h4></td>
-          </tr>
-          <tr>
-            <td><img src="https://maps.google.com/mapfiles/ms/icons/yellow-dot.png" alt="Red Marker"></td>
-            <td><h4>Unknown</h4></td>
-            <td><img src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m1.png" alt="Site Cluster" height="32"></td>
-            <td><h4>Site Cluster</h4></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div>
+    <h6><img src="https://maps.google.com/mapfiles/ms/icons/green-dot.png" height="20px" alt="Green Marker">  (Online) |
+    <img src="https://maps.google.com/mapfiles/ms/icons/red-dot.png" height="20px" alt="Red Marker">  (Offline) |
+    <img src="https://maps.google.com/mapfiles/ms/icons/yellow-dot.png" height="20px" alt="Yellow Marker">  (Unknown)
+     </h6>
   </div>
+  <hr class="thick-line">
+
+      <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title"> Manual Server Check</h3>
+      </div>
+      <div class="panel-body">
+        <%= form_tag manualLookup_path, :method => :post, remote: true, :class =>'form-horizontal', id: "manualLookup" do %>
+        <div class="form-group">
+          <%= label_tag :address, 'Address' , class: ' col-xs-3 control-label' %>
+          <div class="col-sm-9 col-xs-12">
+            <%= text_field_tag :address, nil, class: 'form-control', placeholder: 'e.g., 8.8.8.8' %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-xs-8">
+          <h3 id="manualLookupStatus" style="text-align:left; margin-top:6px; padding-left: 160px;"></h3>
+          </div>
+          <div class="col-xs-4 text-right">
+            <%= submit_tag "Check", class: "btn btn-primary" %>
+          </div>
+        </div>
+        <% end %>
+              <%= render 'common/spinner' %>
+      </div>
+    </div>
 </div>
 </hr>
-</div>
-</div>
