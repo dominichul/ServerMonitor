@@ -3,9 +3,6 @@ class Site < ApplicationRecord
 	require "http"
 	require "openssl"
 	require "ipaddress"
-	require "net/http"
-
-	OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
 	belongs_to :user
 	attr_accessor :autoLocate
