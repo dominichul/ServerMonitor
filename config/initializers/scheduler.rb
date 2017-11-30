@@ -1,8 +1,10 @@
 require 'rufus-scheduler'
 
-scheduler = Rufus::Scheduler::singleton
+scheduler = Rufus::Scheduler.new(:lockfile => ".rufus-scheduler.lock")
 
-scheduler.every '2m' do
+unless scheduler.down?
+puts "Scheduler started"
+scheduler.every '5m' do
 
 	account_sid = "AC241e3bb37cec6542de4225e9a24c96e9"
     auth_token = "43471435da648c078187b2c75a278749"
@@ -15,4 +17,6 @@ scheduler.every '2m' do
 	Site.all.each do |site|
 		site.delay(:queue => 'serverchecks').scheduled_check(client, fromNumber)
 	end
+end
+
 end
