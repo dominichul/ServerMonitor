@@ -35,10 +35,12 @@ class Site < ApplicationRecord
 				if res.code.to_i < 500
 					self.update_attributes(:status => true, :lastchecked => Time.now)
 				else
+					puts "I'm here in else statement at address #{self.ipaddress}"
 					self.update_attributes(:status => false, :lastchecked => Time.now)
 					self.delay(:queue => 'serverchecks').send_sms(client, fromNumber) #change queue to sendsms once deployed. Heroku only allows for 1 worker process
 				end
 			rescue Exception => ex
+				puts "I'm here in exception at address #{self.ipaddress}"
 				self.update_attributes(:status => false, :lastchecked => Time.now)
 				self.delay(:queue => 'serverchecks').send_sms(client, fromNumber) #change queue to sendsms once deployed. Heroku only allows for 1 worker process
 			end
