@@ -29,6 +29,21 @@ class Site < ApplicationRecord
 			end
 		end
 
+		def scheduled_check(client, fromNumber)
+			begin
+				res = HTTP.timeout(:global, :write => 1, :connect => 2, :read => 1).head("http://#{self.ipaddress}")
+				if res.code.to_i < 500
+					self.update_attributes(:status => true, :lastchecked => Time.now)
+				else
+					self.update_attributes(:status => false, :lastchecked => Time.now)
+					self.delay(:queue => 'serverchecks').send_sms(client, fromNumber) #change queue to sendsms once deployed. Heroku only allows for 1 worker process
+				end
+			rescue Exception => ex
+				self.update_attributes(:status => false, :lastchecked => Time.now)
+				self.delay(:queue => 'serverchecks').send_sms(client, fromNumber) #change queue to sendsms once deployed. Heroku only allows for 1 worker process
+			end
+		end
+
 		def check_autoLocate
 			if autoLocate == "1"
 				coords = getCoordinatesFromIP
@@ -40,6 +55,15 @@ class Site < ApplicationRecord
 					self.latitude = nil
 				end
 			end		
+		end
+
+		def send_sms(client, fromNumber)
+			puts "Entered send_sms for address: #{self.id}"
+			client.messages.create(
+      			to: "+15872230517",
+      			from: fromNumber,
+      			body: "Your server #{self.ipaddress} is down"
+    		)
 		end
 
 		#static methods

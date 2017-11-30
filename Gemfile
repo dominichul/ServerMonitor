@@ -46,6 +46,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'geocoder'
 gem 'rufus-scheduler'
 gem 'delayed_job_active_record'
+gem 'twilio-ruby'
 
 group :development, :test do
 	# Use sqlite3 as the database for Active Record
