@@ -1,6 +1,9 @@
 require 'rufus-scheduler'
 
-scheduler = Rufus::Scheduler::singleton
+
+scheduler = Rufus::Scheduler.new(:lockfile => ".rufus-scheduler.lock")
+
+unless defined?(Rails::Console)
 
 scheduler.every '2m' do
 
@@ -16,4 +19,6 @@ scheduler.every '2m' do
 	Site.all.each do |site|
 		site.delay(:queue => 'serverchecks').scheduled_check(client, fromNumber)
 	end
+end
+
 end
