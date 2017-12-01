@@ -5,9 +5,9 @@ scheduler = Rufus::Scheduler.new(:lockfile => ".rufus-scheduler.lock")
 
 unless defined?(Rails::Console)
 
-scheduler.every '2m' do
+puts "SCHEDULER STARTED"
 
-	puts "SCHEDULER STARTED"
+scheduler.every '2m' do
 
 	account_sid = "AC241e3bb37cec6542de4225e9a24c96e9"
     auth_token = "43471435da648c078187b2c75a278749"
