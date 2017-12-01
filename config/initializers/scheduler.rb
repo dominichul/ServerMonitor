@@ -1,9 +1,8 @@
 require 'rufus-scheduler'
 
+if !ENV["PORT"].nil?
 
-scheduler = Rufus::Scheduler.new(:lockfile => ".rufus-scheduler.lock")
-
-unless defined?(Rails::Console)
+scheduler = Rufus::Scheduler.singleton
 
 puts "SCHEDULER STARTED"
 
